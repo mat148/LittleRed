@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Little Red</title>
+        <!--<link rel="stylesheet" href="main.css">-->
+    </head>
+    
+    <link href='http://fonts.googleapis.com/css?family=Kotta+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="js/TweenMax.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+  	<script type="text/javascript" src="js/jquery.scrollmagic.min.js"></script>
+    
+    <style>
+        html{
+            height: 100%;
+        }
+        body{
+            height: 100%;
+        }
+        .contain{
+            width: 80%;
+            height: 500px;
+            margin: 0 auto;
+            background-color: #d9d9d9;
+        }
+        
+        .title-contain .p-one{
+            margin-top: 300px;
+            font-size: 80px;
+            text-align: center;
+            font-family: 'Kotta One', serif;
+        }
+        .title-contain .p-two{
+            font-size: 40px;
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+        }
+        .text{
+            font-size: 24px;
+            width: 300px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
+        }
+        #trigger1{
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        position: absolute;
+        top: 0px;
+        }
+        #animate1{
+            margin: 0 auto;
+            border-radius: 4px;
+            position: absolute;
+            top: 0px;
+            opacity: 1;
+        }
+        .partone-contain{
+            margin-bottom: 1000px;
+            position: relative;
+        }
+    </style>
+    <body>
+        <script>
+            var controller;
+            $(document).ready(function($) {
+                // init controller
+                controller = new ScrollMagic();
+            });
+        </script>
+        
+        <!--Title-->
+        <div class="title-contain contain">
+            <p class="p-one">Little Red Riding Hood</p>
+            <p class="p-two">By: Brothers Grimm</p>
+        </div>
+        
+        <div class="contain partone-contain">
+            <p class="text" id="animate1">Once upon a time there was a dear little girl who was loved by everyone who looked at her.</p>
+            <div id="trigger1"></div>
+        </div>
+    
+    <script>
+        $(document).ready(function($) {
+        // build tween
+        var tween = TweenMax.fromTo("#animate1", 0.5, 
+            {"opacity":"0"},
+            {"opacity":"1"}
+        );
+
+        // build scene
+        var scene = new ScrollScene({triggerElement: "#trigger1", duration: 300})
+        .setTween(tween)
+        .addTo(controller);
+        // show indicators (requires debug extension)
+        scene.addIndicators();
+        });
+    </script>
+    </body>
+</html>
