@@ -20,8 +20,18 @@
         }
         body{
             height: 9000px;
+            width: 1162px;
             background-image: url(img/paper_fibers.png);
             background-repeat: repeat;
+        }
+        
+        body::before{
+            content: "";
+            background-image: url(img/leafRepeat-01.png);
+            height: 9000px;
+            width: 1437px;
+            position: absolute;
+            left: 0px;
         }
         
         .hero{
@@ -84,39 +94,67 @@
             color: white;
             opacity: 0;
             position: absolute;
-            top: 400px;
+            top: 500px;
             left: 50%;
             margin-left: -245px;
             transition: all 2s;
             margin-top: -155px;
         }
-        #trigger1{
+        #triggerHero{
         height: 100px;
         width: 100px;
         margin: 0 auto;
         position: absolute;
         top: 500px;
+        background-color: red;
         }
-        #trigger2{
+        #triggerSecTwo{
         height: 100px;
         width: 100px;
         margin: 0 auto;
         position: absolute;
         top: -134px;
+        background-color: red;
         }
-        #trigger3{
+        #triggerPinOne{
         height: 100px;
         width: 100px;
         margin: 0 auto;
         position: absolute;
         top: 1200px;
+        background-color: red;
         }
-        #trigger4{
+        #triggerSecThree{
         height: 100px;
         width: 100px;
         margin: 0 auto;
         position: absolute;
         top: 1400px;
+        background-color: red;
+        }
+        #triggerSecFourGram{
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        position: absolute;
+        background-color: red;
+        top: 1800px;
+        }
+        #triggerSecFour{
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        position: absolute;
+        background-color: red;
+        top: 1900px;
+        }
+        #triggerPinTwo{
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        position: absolute;
+        background-color: red;
+        top: 2000px;
         }
         .partone-contain{
             margin-top: 210px;
@@ -140,8 +178,8 @@
             position: absolute;
             top: -100px;
             left: 50%;
-            margin-left: -87.5px;
             opacity:0;
+            z-index: 1;
         }
         .gram{
             width: 199px;
@@ -152,6 +190,16 @@
             position: absolute;
             top: -87px;
             left: 120%;
+            opacity: 0;
+            z-index: 0;
+        }
+        .cape{
+            width: 199px;
+            height: 356px;
+            background-image: url(img/RedHood.png);
+            position: absolute;
+            top: -560px;
+            left: -13px;
             opacity: 0;
         }
     </style>
@@ -172,19 +220,24 @@
             
             <div class="trees1"></div>
             <div class="trees2"></div>
-            <div id="trigger1"></div>
+            <div id="triggerHero"></div>
         </div>
-        
-        <div id="trigger3"></div>
         
         <div class="contain partone-contain">
             <p class="partone-text">Once upon a time there was a dear little girl who was loved by everyone who looked at her.</p>
-            <div class="red"></div>
+            <div class="red">
+                <div class="cape"></div>
+            </div>
             <div class="gram"></div>
-            <div id="trigger2"></div>
+            <div id="triggerSecTwo"></div>
         </div>
         
-        <div id="trigger4"></div>
+        <div id="triggerPinOne"></div>
+        
+        <div id="triggerSecThree"></div>
+        
+        <div id="triggerSecFourGram"></div>
+        <div id="triggerSecFour"></div>
     
     <script>
         $(document).ready(function($) {
@@ -200,11 +253,11 @@
         
         function animateHero()
         {
-            $(".p-one").css({"top": "200px", "opacity": "1"});
+            $(".p-one").css({"top": "240px", "opacity": "1"});
 
             $(".p-two").delay(1000).queue(function()
             {
-               $(".p-two").css({"top":"560px", "opacity":"1"}); 
+               $(".p-two").css({"top":"580px", "opacity":"1"}); 
             });
 
             $('.trees1').delay(2000).queue(function() 
@@ -236,73 +289,116 @@
                 {"right":"5%"}
             );
             
-            window.tweenSecOne = TweenMax.fromTo(".partone-text", 0.5, 
+            window.tweenTextTwo = TweenMax.fromTo(".partone-text", 0.5, 
                 {"opacity":"0", "top":"0px"},
                 {"opacity":"1", "top":"50px"}
             );
             
-            window.tweenRedOne = TweenMax.fromTo(".red", 0.5, 
+            window.tweenRedTwo = TweenMax.fromTo(".red", 0.5,
                 {"opacity":"0", "top":"-100px"},
                 {"opacity":"1", "top":"0px"}
             );
             
-            window.tweenGramTwo = TweenMax.fromTo(".gram", 0.5, 
+            window.tweenGramThree = TweenMax.fromTo(".gram", 0.5,
                 {"opacity":"0", "left":"120%"},
-                {"opacity":"1", "left":"55%"}
+                {"opacity":"1", "left":"58%"}
             );
             
-            window.tweenRedTwo = TweenMax.fromTo(".red", 0.5, 
+            window.tweenRedThree = TweenMax.fromTo(".red", 0.5, 
                 {"left":"50%"},
                 {"left":"45%"}
+            );
+            
+            window.tweenGramFour = TweenMax.to(".gram", 0.5, 
+                {"opacity":"0", "left":"120%"}
+            );
+            
+            window.tweenRedFour = TweenMax.to(".red", 0.5, 
+                {"left":"50%"}
+            );
+            
+            window.tweenCapeFour = TweenMax.to(".cape", 0.5, 
+                {"top":"-20px"}
             );
         }
         
         function buildScene()
         {
-            var scene = new ScrollScene({triggerElement: "#trigger1", duration: 100})
+            var scene = new ScrollScene({triggerElement: "#triggerHero", duration: 100})
             .setTween(tweenHero)
             .addTo(controller);
             
-            var scene = new ScrollScene({triggerElement: "#trigger1", duration: 100})
+            var scene = new ScrollScene({triggerElement: "#triggerHero", duration: 100})
             .setTween(tweenHero2)
             .addTo(controller);
             
-            var scene = new ScrollScene({triggerElement: "#trigger1", duration: 100})
+            var scene = new ScrollScene({triggerElement: "#triggerHero", duration: 100})
             .setTween(tweenTree1)
             .addTo(controller);
             
-            var scene = new ScrollScene({triggerElement: "#trigger1", duration: 100})
+            var scene = new ScrollScene({triggerElement: "#triggerHero", duration: 100})
             .setTween(tweenTree2)
             .addTo(controller);
 
-            var scene = new ScrollScene({triggerElement: "#trigger2", duration: 200})
-            .setTween(tweenSecOne)
+            var scene = new ScrollScene({triggerElement: "#triggerSecTwo", duration: 200})
+            .setTween(tweenTextTwo)
             .addTo(controller);
             
-            var scene = new ScrollScene({triggerElement: "#trigger2", duration: 200})
-            .setTween(tweenRedOne)
-            .addTo(controller);
-            
-            var scene = new ScrollScene({triggerElement: "#trigger3"})
-            .setPin(".partone-contain")
-            .addTo(controller);
-            
-            var scene = new ScrollScene({triggerElement: "#trigger4", duration: 200})
-            .setTween(tweenGramTwo)
-            .addTo(controller);
-            
-            var scene = new ScrollScene({triggerElement: "#trigger4", duration: 200})
+            var scene = new ScrollScene({triggerElement: "#triggerSecTwo", duration: 200})
             .setTween(tweenRedTwo)
             .addTo(controller);
             
-            var scene = new ScrollScene({triggerElement: "#trigger4"})
-						.addTo(controller)
-						.on("enter", function (e) {
-                            $(".partone-text").text("but most of all by her grandmother, and there was nothing that she would not have given to the child.");
-						})
-                        .on("leave", function (e) {
-                            $(".partone-text").text("Once upon a time there was a dear little girl who was loved by everyone who looked at her.");
-						});
+            var scene = new ScrollScene({triggerElement: "#triggerPinOne"})
+            .setPin(".partone-contain")
+            .addTo(controller);
+            
+            var scene = new ScrollScene({triggerElement: "#triggerPinOne"})
+            .addTo(controller)
+            .on("enter", function (e) {
+                $(".partone-text").text("but most of all by her grandmother, and there was nothing that she would not have given to the child.");
+            })
+            .on("leave", function (e) {
+                $(".partone-text").text("Once upon a time there was a dear little girl who was loved by everyone who looked at her.");
+            });
+            
+            var scene = new ScrollScene({triggerElement: "#triggerPinOne"})
+            .addTo(controller)
+            .on("enter", function (e) {
+                $(".cape").css({"opacity":"1"});
+            })
+            
+            .on("leave", function (e) {
+                $(".cape").css({"opacity":"0"});
+            })
+            
+            var scene = new ScrollScene({triggerElement: "#triggerSecThree", duration: 200})
+            .setTween(tweenGramThree)
+            .addTo(controller);
+            
+            var scene = new ScrollScene({triggerElement: "#triggerSecThree", duration: 200})
+            .setTween(tweenRedThree)
+            .addTo(controller);
+            
+            var scene = new ScrollScene({triggerElement: "#triggerSecFourGram", duration: 100})
+            .setTween(tweenGramFour)
+            .addTo(controller);
+            
+            var scene = new ScrollScene({triggerElement: "#triggerSecFourGram", duration: 200})
+            .setTween(tweenRedFour)
+            .addTo(controller);
+            
+            var scene = new ScrollScene({triggerElement: "#triggerSecFour"})
+            .addTo(controller)
+            .on("enter", function (e) {
+                $(".partone-text").text("Once she gave her a little riding hood of red velvet, which suited her so well that she would never wear anything else; so she was always called 'Little Red Riding Hood.");
+            })
+            .on("leave", function (e) {
+                $(".partone-text").text("Once upon a time there was a dear little girl who was loved by everyone who looked at her.");
+            });
+            
+            var scene = new ScrollScene({triggerElement: "#triggerSecFour", duration: 500})
+            .setTween(tweenCapeFour)
+            .addTo(controller);
         }
     </script>
     </body>
